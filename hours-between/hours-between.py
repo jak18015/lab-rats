@@ -21,8 +21,8 @@ def hours_between_dates(date1_str, date2_str, date_format="%Y-%m-%d %H:%M"):
         print(f"Error parsing dates: {e}")
         return None
 
-date1 = "2025-05-11 13:00"
-date2 = "2025-05-12 10:30"
+date1 = "2025-05-11 08:00"
+date2 = "2025-05-11 13:00"
 print(f"\ninfection timepoint: {date1}")
 print(f"timepoint1: {date1}\n\t{hours_between_dates(date1, date2)} hpi")
 
