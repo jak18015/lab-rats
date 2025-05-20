@@ -1,0 +1,7 @@
+| Ligase                                                     | Source Organism                  | Optimal Temp | Cofactor | Gibson Compatible?             | Notes                                                                                            |
+| ---------------------------------------------------------- | -------------------------------- | ------------ | -------- | ------------------------------ | ------------------------------------------------------------------------------------------------ |
+| **Ampligase**                                              | *Thermus flavus*                 | 55–65°C      | NAD⁺     | ✅ Yes (with buffer adjustment) | High fidelity, often used in SNP detection or LCR; can be used in Gibson if buffer is compatible |
+| **Thermostable NAD⁺-dependent ligase (from *Pyrococcus*)** | *Pyrococcus* spp.                | \~65°C       | NAD⁺     | ⚠️ Possibly                    | Less commonly used in commercial Gibson kits; verify compatibility                               |
+| **9°N DNA Ligase**                                         | *Thermococcus sp.*               | \~60°C       | NAD⁺     | ⚠️ Possibly                    | Less widely available; proprietary formulations                                                  |
+| **HiFi Taq DNA Ligase** (e.g., from Lucigen or others)     | *Thermus aquaticus* (engineered) | 45–65°C      | NAD⁺     | ✅ Yes                          | Engineered version of Taq for higher fidelity                                                    |
+

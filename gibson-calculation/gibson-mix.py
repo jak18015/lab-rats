@@ -1,6 +1,6 @@
 import os
 
-def scale_gibson_mastermix(num_reactions):
+def scale_gibson_mastermix(num_reactions, hot_fusion=False):
     """Scale Gibson Assembly Master Mix ingredients based on desired number of reactions."""
 
     base_reactions = 40
@@ -13,6 +13,11 @@ def scale_gibson_mastermix(num_reactions):
         "Taq DNA ligase (40U/uL)": 80.0,
         "Molecular biology grade H2O": 346.8
     }
+
+    if hot_fusion:
+        # Remove ligase and reassign its volume to water
+        ligase_volume = recipe.pop("Taq DNA ligase (40U/uL)")
+        recipe["Molecular biology grade H2O"] += ligase_volume
 
     scaled_recipe = {}
     adjustments = {}
@@ -28,7 +33,7 @@ def scale_gibson_mastermix(num_reactions):
     scaled_recipe["Aliquot size (uL)"] = 15
     scaled_recipe["Number of aliquots"] = int(scaled_recipe["Total volume (uL)"] // 15)
 
-    return scaled_recipe, adjustments
+    return scaled_recipe, adjustments, hot_fusion
 
 # Clear screen
 os.system('cls' if os.name == 'nt' else 'clear')
@@ -43,11 +48,14 @@ except ValueError as e:
     print(f"Invalid input: {e}")
     exit(1)
 
+hot_fusion_input = input("Use Hot Fusion (no ligase)? (y/n): ").strip().lower()
+hot_fusion = hot_fusion_input == 'y'
+
 # Scale and get adjustments
-scaled, adjustments = scale_gibson_mastermix(num_reactions)
+scaled, adjustments, hot_fusion_used = scale_gibson_mastermix(num_reactions, hot_fusion)
 
 # Print header
-print(f"\nScaled Gibson Assembly Master Mix for {num_reactions} reactions:")
+print(f"\nScaled {'Hot Fusion' if hot_fusion_used else 'Gibson'} Assembly Master Mix for {num_reactions} reactions:")
 print(f"Total volume: {scaled['Total volume (uL)']} μL")
 print(f"Aliquot size: {scaled['Aliquot size (uL)']} μL")
 
@@ -64,3 +72,6 @@ if adjustments:
     print("\nNote:")
     for ingredient, original_value in adjustments.items():
         print(f"- {ingredient}: originally {original_value} μL, raised to 1.0 μL for pipetting accuracy.")
+
+if hot_fusion_used:
+    print("\nHot Fusion mode: Taq DNA ligase omitted and volume replaced with water.")
