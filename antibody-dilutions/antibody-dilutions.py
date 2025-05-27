@@ -35,15 +35,12 @@ def calculate_multi_dilution(num_coverslips, volume_per_coverslip_uL, antibodies
 # Example usage:
 if __name__ == "__main__":
     os.system('clear')
-    coverslips = int(input("Enter number of coverslips: "))
-    vol_per_coverslip = float(input("Enter volume per coverslip in µL: "))
-    num_antibodies = int(input("Enter number of antibodies to include: "))
-
-    antibodies = {}
-    for i in range(num_antibodies):
-        name = input(f"Enter name of antibody #{i + 1}: ")
-        dilution = int(input(f"Enter dilution factor for {name} (e.g., 500 for 1:500): "))
-        antibodies[name] = dilution
+    coverslips = 24 # Default number of coverslips
+    vol_per_coverslip = 20.0  # Default volume per coverslip in µL
+    antibodies = {
+        "Hoechst": 1000,  # Default dilution factor for example
+    }
+   
 
     result = calculate_multi_dilution(coverslips, vol_per_coverslip, antibodies)
 
