@@ -1,18 +1,7 @@
 import os
+import json
 
 def calculate_multi_dilution(num_coverslips, volume_per_coverslip_uL, antibodies, overage_percent=10):
-    """
-    Calculate stock and diluent volumes for multiple antibodies in IFA.
-
-    Parameters:
-        num_coverslips (int): number of coverslips
-        volume_per_coverslip_uL (float): volume to use per coverslip
-        antibodies (dict): dictionary with antibody names as keys and dilution factors as values
-        overage_percent (float): extra volume to compensate for pipetting error
-
-    Returns:
-        dict with total volume, antibody stock volumes, and required diluent
-    """
     base_total_volume = num_coverslips * volume_per_coverslip_uL
     adjusted_total_volume = base_total_volume * (1 + overage_percent / 100)
 
@@ -32,20 +21,25 @@ def calculate_multi_dilution(num_coverslips, volume_per_coverslip_uL, antibodies
         'diluent_volume_uL': diluent_volume
     }
 
-# Example usage:
 if __name__ == "__main__":
     os.system('clear')
-    coverslips = 24 # Default number of coverslips
-    vol_per_coverslip = 20.0  # Default volume per coverslip in µL
-    antibodies = {
-        "Hoechst": 1000,  # Default dilution factor for example
-    }
-   
+    with open("antibody-dilutions/config.json", "r") as f:
+        config = json.load(f)
 
-    result = calculate_multi_dilution(coverslips, vol_per_coverslip, antibodies)
+    coverslips = config["num_coverslips"]
+    vol_per_coverslip = config["volume_per_coverslip_uL"]
+    overage = config.get("overage_percent", 10)
+    dilution_sets = config["dilution_sets"]
 
-    print("\n--- Multi-Antibody Dilution Calculation with 10% Overage ---")
-    print(f"Total volume (with overage): {result['adjusted_total_volume_uL']} µL")
-    for name, vol in result['stock_volumes_uL'].items():
-        print(f"Volume of {name} stock: {vol} µL")
-    print(f"Volume of diluent (e.g., PBS): {result['diluent_volume_uL']} µL")
+    print("\n=== Antibody Dilution Calculations ===\n")
+    print(f"Number of coverslips: {coverslips}")
+    print(f"Volume per coverslip: {vol_per_coverslip} µL")
+    print(f"Overage percentage: {overage}%\n")
+    for set_name, antibodies in dilution_sets.items():
+        print(f"--- {set_name} ---")
+        result = calculate_multi_dilution(coverslips, vol_per_coverslip, antibodies, overage)
+
+        print(f"Total volume: {result['adjusted_total_volume_uL']} µL")
+        for name, vol in result['stock_volumes_uL'].items():
+            print(f"\t- {name}: {vol} µL")
+        print(f"\t- 1% BSA: {result['diluent_volume_uL']} µL\n")
