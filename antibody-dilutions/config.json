@@ -1,7 +1,7 @@
 {
   "num_coverslips": 6,
   "volume_per_coverslip_uL": 20.0,
-  "overage_percent": 10,
+  "overage_percent": 5,
   "dilution_sets": {
     "Primary Antibodies": {
       "Rabbit anti-GRA7": 500,
