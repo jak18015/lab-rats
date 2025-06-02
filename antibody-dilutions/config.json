@@ -1,18 +1,20 @@
 {
-  "num_coverslips": 12,
-  "volume_per_coverslip_uL": 25.0,
+  "num_coverslips": 6,
+  "volume_per_coverslip_uL": 20.0,
   "overage_percent": 10,
   "dilution_sets": {
     "Primary Antibodies": {
-      "Rabbit anti-GAP45": 500,
-      "Mouse anti-IMC1": 500
+      "Rabbit anti-GRA7": 500,
+      "Mouse anti-GFP": 500,
+      "Goat anti-toxo biotin": 500
     },
     "Secondary Antibodies": {
-      "Goat anti-Rabbit 488": 500,
-      "Goat anti-Mouse 594": 500
+      "Goat anti-Rabbit 488": 20,
+      "Goat anti-Mouse 594": 20,
+      "Streptavidin-647": 20
     },
     "Nuclear Stain": {
-      "Hoechst": 1000
+      "none": 1
     }
   }
 }
