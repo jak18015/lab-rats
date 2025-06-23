@@ -23,9 +23,10 @@ def calculate_multi_dilution(num_coverslips, volume_per_coverslip_uL, antibodies
 
 if __name__ == "__main__":
     os.system('clear')
+    print(f'wd: {os.getcwd()}')
     with open("antibody-dilutions/config.json", "r") as f:
         config = json.load(f)
-
+    
     coverslips = config["num_coverslips"]
     vol_per_coverslip = config["volume_per_coverslip_uL"]
     overage = config.get("overage_percent", 10)
