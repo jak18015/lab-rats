@@ -12,7 +12,7 @@ def ifa(formaldehyde_stock, formaldehyde_dilution, pbs_stock, pbs_dilution, volu
     print(f"\n{triton_dilution}% Triton X-100 solution:")
     triton(triton_stock, triton_dilution, pbs_stock, pbs_dilution, volume_final)
     print(f"\n{desired_bsa_percentage}% BSA solution:")
-    bsa(pbs_stock, pbs_dilution, desired_bsa_percentage, volume_final)
+    bsa(desired_bsa_percentage, volume_final)
 
 
 if __name__ == "__main__":

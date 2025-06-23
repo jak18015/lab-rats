@@ -73,7 +73,7 @@ def triton(triton_stock=10, triton_dilution=0.1, pbs_stock=10, pbs_dilution=1, v
     print(f"Final concentrations: Triton X-100: {triton_dilution}%, PBS: {pbs_dilution}X")
 
 
-def bsa(pbs_stock=10, pbs_dilution=1, desired_bsa_percentage=1, volume_final=12):
+def bsa(desired_bsa_percentage=1, volume_final=12):
     """
     Prepare a Bovine Serum Albumin (BSA) solution for immunofluorescence assay (IFA).
     This function calculates the mass of BSA needed and the volumes of PBS stock and water to
@@ -88,16 +88,13 @@ def bsa(pbs_stock=10, pbs_dilution=1, desired_bsa_percentage=1, volume_final=12)
     # where concentration is in g/mL (1% = 1 g/100 mL = 0.01 g/mL)
     bsa_concentration = desired_bsa_percentage / 100  # Convert percentage to a fraction
     mass_bsa = bsa_concentration * volume_final  # Mass in grams for the final volume in mL
-    volume_stock_pbs = c1v1(c1=pbs_stock, v1=None, c2=pbs_dilution, v2=volume_final)
-
-    volume_water = volume_final - volume_stock_pbs  # Volume of water to add
 
     # Display the results
     print(f"Total volume of the final solution: {volume_final} mL.")
     print(f"Mass of BSA needed: {mass_bsa:.2f} g.")
-    print(f"Volume of 10xPBS: {volume_stock_pbs:.2f} mL.")
-    print(f"Volume of water: {volume_water:.2f} mL.")
-    print(f"Final concentrations: BSA: {desired_bsa_percentage}%, PBS: {pbs_dilution}X")
+    print(f"Dissolve BSA in {volume_final/2:.2f} mL of 1xPBS solution.")
+    print(f"Raise to {volume_final} mL with 1xPBS.")
+    print(f"Final concentrations: BSA: {desired_bsa_percentage}%")
 
 
 
