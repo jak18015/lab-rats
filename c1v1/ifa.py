@@ -22,7 +22,7 @@ if __name__ == "__main__":
     pbs_dilution = 1  # Desired final concentration as a multiple of 1x
     volume_final = 12  # Final volume of the solutions in mL
     triton_stock = 10  # Stock solution concentration as a percentage
-    triton_dilution = 0.025  # Desired final concentration as a percentage
+    triton_dilution = 0.25  # Desired final concentration as a percentage
     desired_bsa_percentage = 1  # Desired final concentration as a percentage
 
     ifa(formaldehyde_stock, formaldehyde_dilution, pbs_stock, pbs_dilution, volume_final,
