@@ -1,5 +1,5 @@
 {
-  "num_coverslips": 6,
+  "num_coverslips": 4,
   "volume_per_coverslip_uL": 20.0,
   "overage_percent": 5,
   "dilution_sets": {
@@ -9,12 +9,12 @@
       "Goat anti-toxo biotin": 500
     },
     "Secondary Antibodies": {
-      "Goat anti-Rabbit 488": 20,
-      "Goat anti-Mouse 594": 20,
-      "Streptavidin-647": 20
+      "Goat anti-Rabbit 488": 500,
+      "Goat anti-Mouse 594": 500,
+      "Streptavidin-647": 500
     },
     "Nuclear Stain": {
-      "none": 1
+      "Hoechst": 500
     }
   }
 }
