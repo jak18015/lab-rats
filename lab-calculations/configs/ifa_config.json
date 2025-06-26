@@ -1,0 +1,10 @@
+{
+  "formaldehyde_stock": 10,
+  "formaldehyde_dilution": 4,
+  "pbs_stock": 10,
+  "pbs_dilution": 1,
+  "volume_final": 12,
+  "triton_stock": 10,
+  "triton_dilution": 0.25,
+  "desired_bsa_percentage": 1
+}

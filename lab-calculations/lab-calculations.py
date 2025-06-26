@@ -1,11 +1,13 @@
 import os
-from modules import ab_dilutions
+from modules import ab_dilutions, c1v1
 
 if not os.getcwd().endswith("lab-calculations"):
     raise RuntimeError("Please run this script from the 'lab-calculations' directory.")
 
 scripts = {
-    'ab_dilutions': ab_dilutions.calculate_ab_dilutions,}
+    'ab_dilutions': ab_dilutions.calculate_ab_dilutions,
+    'c1v1': c1v1.c1v1_calculator,
+    }
 
 script_choices = list(scripts.keys())
 print("Available scripts:")
