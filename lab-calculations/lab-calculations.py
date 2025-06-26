@@ -1,6 +1,6 @@
 import os
 import json
-from modules import ab, ifa
+from modules import ab, ifa, gibson
 
 def load_config(script_name):
     config_path = f"configs/{script_name}_config.json"
@@ -18,33 +18,35 @@ def save_config(script_name, config):
         json.dump(config, f, indent=4)
 
 def edit_config(config):
-    def prompt_for_value(prefix, key, value):
-        if isinstance(value, dict):
-            print(f"\nEditing dictionary for '{prefix}{key}':")
-            for subkey, subval in value.items():
-                # Recursively handle nested dictionaries
-                new_subval = prompt_for_value(f"{prefix}{key}.", subkey, subval)
-                value[subkey] = new_subval
-        else:
-            full_key = f"{prefix}{key}"
-            new_value = input(f"Enter new value for {full_key} (current: {value}, press Enter to keep current): ").strip()
-            if new_value:
-                try:
-                    # Convert the value to the appropriate type
-                    if isinstance(value, int):
-                        return int(new_value)
-                    elif isinstance(value, float):
-                        return float(new_value)
-                    else:
-                        return new_value  # For strings or other types
-                except ValueError:
-                    print(f"Invalid input for {full_key}, keeping original value.")
+    def convert_to_type(value, new_value):
+        try:
+            if isinstance(value, bool):
+                return new_value.lower() in ['true', '1', 'yes', 'y']
+            if isinstance(value, int):
+                return int(new_value)
+            if isinstance(value, float):
+                return float(new_value)
+            return str(new_value)  # Convert to string by default
+        except ValueError:
+            print(f"Invalid input for {value}, keeping original value.")
             return value
 
-        return value
+    def prompt_for_value(full_key, current_value):
+        new_value = input(f"Enter new value for {full_key} (current: {current_value}, press Enter to keep current): ").strip()
+        if new_value:
+            return convert_to_type(current_value, new_value)
+        return current_value
 
-    for key, value in config.items():
-        config[key] = prompt_for_value("", key, value)
+    def edit_nested_config(prefix, local_config):
+        for key, value in local_config.items():
+            full_key = f"{prefix}{key}"
+            if isinstance(value, dict):
+                print(f"\nEditing dictionary for '{full_key}':")
+                edit_nested_config(f"{full_key}.", value)
+            else:
+                local_config[key] = prompt_for_value(full_key, value)
+
+    edit_nested_config("", config)
 
 def main():
     if not os.getcwd().endswith("lab-calculations"):
@@ -53,10 +55,13 @@ def main():
     scripts = {
         'ab': ab.calculate_ab_dilutions,
         'ifa': ifa.c1v1_calculator,
+        'gibson': gibson.run_gibson_mixture
     }
+
     configs = {
         'ab': 'configs/ab_config.json',
         'ifa': 'configs/ifa_config.json',
+        'gibson': 'configs/gibson_config.json'
     }
 
     script_choices = list(scripts.keys())
