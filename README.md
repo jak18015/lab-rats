@@ -2,12 +2,14 @@
 ### Common day-to-day calculations
 
 
+
 <!-- Centered Image with Specified Width -->
 <div style="text-align:center;">
     <img src="images/labrat.jpg" alt="Lab rat image" width="300"/>
 </div>
 
-
+\
+\
 Includes
 - Antibody dilution calculator (ab.py)
 - Hours post-infection calculator (date_calulator.py)
