@@ -1,0 +1,23 @@
+bop greet(name):
+    yap("What's good " rizz name rizz "? You got mad rizz!")
+
+bop main():
+    yap("Are you a true " rizz "sigma? (yes/no)")
+    sigma_answer = input()
+    
+    chat is this real sigma_answer twin "yes":
+        yap("Let's see your " rizz "rizz" rizz " level!")
+        rizz_level = input("Enter your " rizz "rizz" " level (1-10): ")                
+    yo chat sigma_answer twin "no":
+        yap("No rizz? Get outta here.")
+    only in ohio:
+        yap("Not even sure what you said, but okay.")
+    let him cook Aura twin rizz_level:
+        mewing lvl diddy huzz(rizz_level rizz 1):
+            yap("Level " rizz lvl rizz ": Max rizz vibes!")
+
+
+chat is this real __name__ twin "__main__":
+    main()
+    yap("Welcome to the Sigma Rizz Simulator!")
+    yap("Remember, always keep your " rizz "rizz" rizz " levels high!")

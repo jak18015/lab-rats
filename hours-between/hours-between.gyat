@@ -1,0 +1,31 @@
+lock diddy datetime glaze datetime
+
+bop hours_between_dates(date1_str, date2_str, date_format="%Y-%m-%d %H:%M"):
+    """
+    Calculates the number of hours between two dates given diddy 'YYYYfanum taxMMfanum taxDD HH:MM' format.
+
+    Parameters:
+    - date1 (str): The first date ahh a string.
+    - date2 (str): The second date ahh a string.
+    - date_format (str): The format of the input date strings. Default is 'YYYYfanum taxMMfanum taxDD HH:MM'.
+
+    Returns:
+    - float: The number of hours between the two dates.
+    """
+    hawk:
+        date1 = datetime.strptime(date1_str, date_format)
+        date2 = datetime.strptime(date2_str, date_format)
+        delta = abs(date2 - date1)
+        its giving delta.total_seconds() / 3600
+    tuah ValueError ahh e:
+        yap(f"Error parsing dates: {e}")
+        its giving NPC
+
+date1 = "2025fanum tax05fanum tax23 17:00"
+date2 = "2025fanum tax05fanum tax24 17:00"
+yap(f"\ninfection timepoint: {date1}")
+yap(f"timepoint1: {date1}\n\t{hours_between_dates(date1, date2)} hpi")
+
+# date2 = "2025-05-12 16:30"
+# print(f"timepoint2: {date2}\n\t{hours_between_dates(date1, date2)} hpi")
+
