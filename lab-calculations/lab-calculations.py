@@ -1,12 +1,12 @@
 import os
-from modules import ab_dilutions, c1v1
+from modules import ab_dilutions, ifa
 
 if not os.getcwd().endswith("lab-calculations"):
     raise RuntimeError("Please run this script from the 'lab-calculations' directory.")
 
 scripts = {
     'ab_dilutions': ab_dilutions.calculate_ab_dilutions,
-    'c1v1': c1v1.c1v1_calculator,
+    'c1v1': ifa.c1v1_calculator,
     }
 
 script_choices = list(scripts.keys())
