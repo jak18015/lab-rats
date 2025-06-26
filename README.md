@@ -20,3 +20,10 @@
 
 ### Modifying the configuration files for each module
 - Each module has an associated config file in `configs/` that can be updated manually or interactively within the script when that module is selected.
+
+### Adding new modules
+- To add a new module:
+  - Create a `module_config.json` in `configs/`
+  - Create the module in `modules/` to accept the config file (e.g. `some_function(config)`)
+  - Import the new module
+  - Add it as a key/value pair to the scripts dictionary
