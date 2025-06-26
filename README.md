@@ -1,5 +1,5 @@
 # Lab Rats
-### Commonly used day-to-day calculations
+### Common day-to-day calculations
 
 
 <!-- Centered Image with Specified Width -->
@@ -9,12 +9,12 @@
 
 
 Includes
-- antibody dilution calculator (ab.py)
-- hours between two times (date_calulator.py)
-- gibson mastermix volumes calculator (gibson.py)
-- fixation, permeabilization, and blocking buffers volume calculator (ifa.py)
-- lipofection volumes calculator (lipofectamine.py)
-- week number calculator (week_calculator.py)
+- Antibody dilution calculator (ab.py)
+- Hours post-infection calculator (date_calulator.py)
+- Gibson Assembly master mix volumes calculator (gibson.py)
+- Fixation, permeabilization, and blocking buffers volume calculator (ifa.py)
+- Lipofection volumes calculator (lipofectamine.py)
+- Week number calculator (week_calculator.py)
 
 ### Installation
 1. Clone the git repo `git clone https://github.com/jak18015/lab-calculations.git`
