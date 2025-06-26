@@ -111,9 +111,7 @@ def ifa(formaldehyde_stock, formaldehyde_dilution, pbs_stock, pbs_dilution, volu
     print(f"\n{desired_bsa_percentage}% BSA solution:")
     bsa(desired_bsa_percentage, volume_final)
 
-def c1v1_calculator():
-    with open("configs/ifa_config.json", "r") as config_file:
-        config = json.load(config_file)
+def c1v1_calculator(config):
     formaldehyde_stock = config["formaldehyde_stock"]
     formaldehyde_dilution = config["formaldehyde_dilution"]
     pbs_stock = config["pbs_stock"]
