@@ -1,4 +1,4 @@
-# Lab calculations
+# Lab Rats
 ### Commonly used day-to-day calculations
 
 
@@ -16,6 +16,9 @@ Includes
 - lipofection volumes calculator (lipofectamine.py)
 - week number calculator (week_calculator.py)
 
-These are stored as modules, called when running main.py
+### Installation
+1. Clone the git repo `git clone https://github.com/jak18015/lab-calculations.git`
+2. Run `main.py` frome the `lab-calculations/` directory.
 
-Each module has an associated config file in configs/ that can be updated manually or interactively within the script when that module is selected.
+### Modifying the configuration files for each module
+- Each module has an associated config file in `configs/` that can be updated manually or interactively within the script when that module is selected.
