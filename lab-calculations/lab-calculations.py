@@ -1,6 +1,6 @@
 import os
 import json
-from modules import ab, ifa, gibson, date_calculator, week_calculator
+from modules import ab, ifa, gibson, date_calculator, week_calculator, lipofectamine
 
 def load_config(script_name):
     config_path = f"configs/{script_name}_config.json"
@@ -57,7 +57,8 @@ def main():
         'ifa': ifa.c1v1_calculator,
         'gibson': gibson.run_gibson_mixture,
         'date_calculator': date_calculator.calculate_hours_between_dates,
-        'week_calculator': week_calculator.week_number_calculator
+        'week_calculator': week_calculator.week_number_calculator,
+        'lipofectamine': lipofectamine.run_lipofection_calculator
     }
 
     script_choices = list(scripts.keys())
