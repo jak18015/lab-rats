@@ -1,6 +1,6 @@
 import os
 import json
-from modules import ab, ifa, gibson
+from modules import ab, ifa, gibson, date_calculator, week_calculator
 
 def load_config(script_name):
     config_path = f"configs/{script_name}_config.json"
@@ -55,13 +55,9 @@ def main():
     scripts = {
         'ab': ab.calculate_ab_dilutions,
         'ifa': ifa.c1v1_calculator,
-        'gibson': gibson.run_gibson_mixture
-    }
-
-    configs = {
-        'ab': 'configs/ab_config.json',
-        'ifa': 'configs/ifa_config.json',
-        'gibson': 'configs/gibson_config.json'
+        'gibson': gibson.run_gibson_mixture,
+        'date_calculator': date_calculator.calculate_hours_between_dates,
+        'week_calculator': week_calculator.week_number_calculator
     }
 
     script_choices = list(scripts.keys())
