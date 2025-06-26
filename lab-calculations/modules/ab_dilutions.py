@@ -22,7 +22,7 @@ def calculate_multi_dilution(num_coverslips, volume_per_coverslip_uL, antibodies
     }
 
 
-def printout():
+def calculate_ab_dilutions():
     with open("configs/antibody-config.json", "r") as f:
         config = json.load(f)
     coverslips = config["num_coverslips"]
