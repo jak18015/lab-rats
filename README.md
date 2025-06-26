@@ -9,6 +9,6 @@ Includes
 - lipofection volumes calculator (lipofectamine.py)
 - week number calculator (week_calculator.py)
 
-These are stored as modules, called when running lab-calculations.py
+These are stored as modules, called when running main.py
 
 Each module has an associated config file in configs/ that can be updated manually or interactively.
