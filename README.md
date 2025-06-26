@@ -1,6 +1,10 @@
 # Lab calculations
 ### Commonly used day-to-day calculations
 
+
+<img src="images/labrat.jpg" alt="labrat" width="300"/>
+
+
 Includes
 - antibody dilution calculator (ab.py)
 - hours between two times (date_calulator.py)
