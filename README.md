@@ -2,7 +2,10 @@
 ### Commonly used day-to-day calculations
 
 
-<img src="images/labrat.jpg" alt="labrat" width="300"/>
+<!-- Centered Image with Specified Width -->
+<div style="text-align:center;">
+    <img src="images/labrat.jpg" alt="Lab rat image" width="300"/>
+</div>
 
 
 Includes
