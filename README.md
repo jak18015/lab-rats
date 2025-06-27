@@ -16,7 +16,7 @@
 - Tissue culture flask splitting calculator (cell_culture.py)
 
 ### Installation
-1. Clone the git repo `git clone https://github.com/jak18015/lab-calculations.git`
+1. Clone the git repo `git clone https://github.com/jak18015/lab-rats.git`
 2. Run `main.py` from the `lab-rats/` directory.
 
 ### Modifying the configuration files for each module
