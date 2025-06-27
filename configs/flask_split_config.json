@@ -1,0 +1,5 @@
+{
+    "initial_flasks": ["T25", "T75", "T175"],
+    "final_flasks": ["6-well", "12-well", "24-well", "96-well", "35mm"],
+    "split_factor": 2
+}
