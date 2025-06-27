@@ -1,58 +1,62 @@
 import os
-from modules import (
-    ab, 
-    ifa, 
-    gibson, 
-    date_calculator, 
-    week_calculator, 
-    lipofectamine,
-    cell_culture
-)
+import argparse
+import importlib
 from modules.config_functions import load_config, save_config, edit_config
 
-scripts = {
-    'ab': ab.calculate_ab_dilutions,
-    'ifa': ifa.c1v1_calculator,
-    'gibson': gibson.run_gibson_mixture,
-    'date_calculator': date_calculator.calculate_hours_between_dates,
-    'week_calculator': week_calculator.week_number_calculator,
-    'lipofectamine': lipofectamine.run_lipofection_calculator,
-    'flask_split': cell_culture.flask_split,
-}
-script_choices = list(scripts.keys())
+def discover_modules():
+    scripts = {}
+    modules_dir = "modules"
+    for filename in os.listdir(modules_dir):
+        if filename.endswith(".py") and not filename.startswith("__") and filename != "config_functions.py":
+            module_name = filename[:-3]
+            module = importlib.import_module(f"modules.{module_name}")
+            
+            # Convention: calculation function is named after the module
+            # and print function is named print_<module_name>_results
+            calc_func_name = f"calculate_{module_name}"
+            print_func_name = f"print_{module_name}_results"
+
+            if hasattr(module, calc_func_name):
+                calc_func = getattr(module, calc_func_name)
+                print_func = getattr(module, print_func_name, lambda c, r: print(r))
+                scripts[module_name] = (calc_func, print_func)
+            elif hasattr(module, module_name): # fallback for simple modules
+                scripts[module_name] = (getattr(module, module_name), lambda c, r: print(r))
+
+
+    return scripts
 
 def main():
     """Run the script selected by the user."""
-    if not os.getcwd().endswith("lab-rats"):
-        raise RuntimeError("Please run this script from the 'lab-rats' directory.")
+    scripts = discover_modules()
+    parser = argparse.ArgumentParser(description='Run common lab calculations.')
+    parser.add_argument('script', choices=scripts.keys(), help='The calculation to run.')
 
-    print("Available scripts:")
-    for i, script_name in enumerate(script_choices, start=1):
-        print(f"\t{i}. {script_name}")
+    args, remaining_argv = parser.parse_known_args()
 
-    script = input("Enter the number next to the script to run (e.g., 1 for 'ab_dilutions'): ").strip()
+    script_name = args.script
+    config = load_config(script_name)
 
-    if script.isdigit() and 1 <= int(script) <= len(script_choices):
-        script_name = script_choices[int(script) - 1]
-        print(f"Running {script_name}...")
-        
-        # Load config
-        config = load_config(script_name)
-        if config is None:
-            return
-
-        # Edit config
+    if not remaining_argv:
+        # Interactive mode
+        print(f"Running {script_name} in interactive mode...")
         edit_config(config)
-
-        # Optionally save updated config
         if input("Do you want to save the updated configuration? (y/n): ").strip().lower() == 'y':
             save_config(script_name, config)
-
-        # Run the script with the updated configuration
-        scripts[script_name](config)
     else:
-        print("Invalid input. Please enter a valid number corresponding to the script you want to run.")
-        exit(1)
+        # Command-line mode
+        config_parser = argparse.ArgumentParser(description=f'Arguments for {script_name}')
+        for key, value in config.items():
+            if isinstance(value, bool):
+                config_parser.add_argument(f'--{key}', action='store_true')
+            else:
+                config_parser.add_argument(f'--{key}', type=type(value), default=value)
+        config_args = config_parser.parse_args(remaining_argv)
+        config.update(vars(config_args))
+
+    calculation_func, print_func = scripts[script_name]
+    results = calculation_func(config)
+    print_func(config, results)
 
 if __name__ == "__main__":
     main()

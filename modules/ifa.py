@@ -34,17 +34,17 @@ def formaldehyde(formaldehyde_stock=10, formaldehyde_dilution=4, pbs_stock=10, p
     :param pbs_stock: Stock PBS solution as a multiple of 1x (default is 10xPBS)
     :param pbs_dilution: Desired final concentration as a multiple of 1x (default is 1xPBS)
     :param volume_final: Final volume of the diluted solution in mL (default is 12 mL)
-    :return: None
+    :return: Dictionary with calculated volumes
     """
-    # Calculate the volumes needed using the c1v1 formula
     volume_stock_formaldehyde = c1v1(c1=formaldehyde_stock, v1=None, c2=formaldehyde_dilution, v2=volume_final)
     volume_stock_pbs = c1v1(c1=pbs_stock, v1=None, c2=pbs_dilution, v2=volume_final)
     volume_water = volume_final - (volume_stock_formaldehyde + volume_stock_pbs)
 
-    print(f"Volume of 10% formaldehyde: {volume_stock_formaldehyde:.2f} mL.")
-    print(f"Volume of 10xPBS: {volume_stock_pbs:.2f} mL.")
-    print(f"Volume of water: {volume_water:.2f} mL.")
-    print(f"Final concentrations: Formaldehyde: {formaldehyde_dilution}%, PBS: {pbs_dilution}X")
+    return {
+        "volume_stock_formaldehyde": round(volume_stock_formaldehyde, 2),
+        "volume_stock_pbs": round(volume_stock_pbs, 2),
+        "volume_water": round(volume_water, 2)
+    }
 
 
 def triton(triton_stock=10, triton_dilution=0.1, pbs_stock=10, pbs_dilution=1, volume_final=12):
@@ -57,20 +57,17 @@ def triton(triton_stock=10, triton_dilution=0.1, pbs_stock=10, pbs_dilution=1, v
     :param pbs_stock: Stock PBS solution as a multiple of 1x (default is 10xPBS)
     :param pbs_dilution: Desired final concentration as a multiple of 1x (default is 1xPBS)
     :param volume_final: Final volume of the diluted solution in mL (default is 12 mL)
-    :return: None
+    :return: Dictionary with calculated volumes
     """
-
-    # Calculate the volumes needed using the c1v1 formula
     volume_stock_triton = c1v1(c1=triton_stock, v1=None, c2=triton_dilution, v2=volume_final)
     volume_stock_pbs = c1v1(c1=pbs_stock, v1=None, c2=pbs_dilution, v2=volume_final)
     volume_water = volume_final - (volume_stock_triton + volume_stock_pbs)
 
-    # Display the results
-    print(f"Total volume of the final solution: {volume_final} mL.")
-    print(f"Volume of Triton X-100: {volume_stock_triton:.2f} mL.")
-    print(f"Volume of 10xPBS: {volume_stock_pbs:.2f} mL.")
-    print(f"Volume of water: {volume_water:.2f} mL.")
-    print(f"Final concentrations: Triton X-100: {triton_dilution}%, PBS: {pbs_dilution}X")
+    return {
+        "volume_stock_triton": round(volume_stock_triton, 2),
+        "volume_stock_pbs": round(volume_stock_pbs, 2),
+        "volume_water": round(volume_water, 2)
+    }
 
 
 def bsa(desired_bsa_percentage=1, volume_final=12):
@@ -78,23 +75,19 @@ def bsa(desired_bsa_percentage=1, volume_final=12):
     Prepare a Bovine Serum Albumin (BSA) solution for immunofluorescence assay (IFA).
     This function calculates the mass of BSA needed and the volumes of PBS stock and water to
     achieve the desired final concentration.
-    :param pbs_stock: Stock PBS solution as a multiple of 1x (default is 10xPBS)
-    :param pbs_dilution: Desired final concentration as a multiple of 1x (default is 1xPBS)
     :param desired_bsa_percentage: Desired final concentration of BSA as a percentage (default is 1%)
     :param volume_final: Final volume of the diluted solution in mL (default is 12 mL)
-    :return: None
+    :return: Dictionary with calculated mass and volumes
     """
-    # Calculate the mass of BSA needed using the formula: mass = volume * concentration
-    # where concentration is in g/mL (1% = 1 g/100 mL = 0.01 g/mL)
-    bsa_concentration = desired_bsa_percentage / 100  # Convert percentage to a fraction
-    mass_bsa = bsa_concentration * volume_final  # Mass in grams for the final volume in mL
+    bsa_concentration = desired_bsa_percentage / 100
+    mass_bsa = bsa_concentration * volume_final
 
-    # Display the results
-    print(f"Total volume of the final solution: {volume_final} mL.")
-    print(f"Mass of BSA needed: {mass_bsa:.2f} g.")
-    print(f"Dissolve BSA in {volume_final/2:.2f} mL of 1xPBS solution.")
-    print(f"Raise to {volume_final} mL with 1xPBS.")
-    print(f"Final concentrations: BSA: {desired_bsa_percentage}%")
+    return {
+        "mass_bsa": round(mass_bsa, 2),
+        "dissolve_volume": round(volume_final / 2, 2),
+        "final_volume": volume_final
+    }
+
 
 def ifa(formaldehyde_stock, formaldehyde_dilution, pbs_stock, pbs_dilution, volume_final,
         triton_stock, triton_dilution, desired_bsa_percentage):
@@ -102,24 +95,49 @@ def ifa(formaldehyde_stock, formaldehyde_dilution, pbs_stock, pbs_dilution, volu
     Perform immunofluorescence assay (IFA) preparation.
     This function calls the formaldehyde, triton, and bsa functions to prepare the necessary solutions.
     """
-    print(f"\n{formaldehyde_dilution}% formaldehyde solution:")
-    formaldehyde(formaldehyde_stock, formaldehyde_dilution, pbs_stock, pbs_dilution, volume_final)
-    print(f"\n{triton_dilution}% Triton X-100 solution:")
-    triton(triton_stock, triton_dilution, pbs_stock, pbs_dilution, volume_final)
-    print(f"\n{desired_bsa_percentage}% BSA solution:")
-    bsa(desired_bsa_percentage, volume_final)
+    return {
+        "formaldehyde": formaldehyde(formaldehyde_stock, formaldehyde_dilution, pbs_stock, pbs_dilution, volume_final),
+        "triton": triton(triton_stock, triton_dilution, pbs_stock, pbs_dilution, volume_final),
+        "bsa": bsa(desired_bsa_percentage, volume_final)
+    }
 
-def c1v1_calculator(config):
-    formaldehyde_stock = config["formaldehyde_stock"]
-    formaldehyde_dilution = config["formaldehyde_dilution"]
-    pbs_stock = config["pbs_stock"]
-    pbs_dilution = config["pbs_dilution"]
-    volume_final = config["volume_final"]
-    triton_stock = config["triton_stock"]
-    triton_dilution = config["triton_dilution"]
-    desired_bsa_percentage = config["desired_bsa_percentage"]
-    ifa(formaldehyde_stock, formaldehyde_dilution, pbs_stock, pbs_dilution, volume_final,
-        triton_stock, triton_dilution, desired_bsa_percentage)
+
+def calculate_ifa(config):
+    return ifa(
+        config["formaldehyde_stock"],
+        config["formaldehyde_dilution"],
+        config["pbs_stock"],
+        config["pbs_dilution"],
+        config["volume_final"],
+        config["triton_stock"],
+        config["triton_dilution"],
+        config["desired_bsa_percentage"]
+    )
+
+
+def print_ifa_results(config, results):
+    print(f"\n{config['formaldehyde_dilution']}% formaldehyde solution:")
+    f_res = results['formaldehyde']
+    print(f"Volume of {config['formaldehyde_stock']}% formaldehyde: {f_res['volume_stock_formaldehyde']:.2f} mL.")
+    print(f"Volume of {config['pbs_stock']}xPBS: {f_res['volume_stock_pbs']:.2f} mL.")
+    print(f"Volume of water: {f_res['volume_water']:.2f} mL.")
+    print(f"Final concentrations: Formaldehyde: {config['formaldehyde_dilution']}%, PBS: {config['pbs_dilution']}X")
+
+    print(f"\n{config['triton_dilution']}% Triton X-100 solution:")
+    t_res = results['triton']
+    print(f"Total volume of the final solution: {config['volume_final']} mL.")
+    print(f"Volume of Triton X-100: {t_res['volume_stock_triton']:.2f} mL.")
+    print(f"Volume of {config['pbs_stock']}xPBS: {t_res['volume_stock_pbs']:.2f} mL.")
+    print(f"Volume of water: {t_res['volume_water']:.2f} mL.")
+    print(f"Final concentrations: Triton X-100: {config['triton_dilution']}%, PBS: {config['pbs_dilution']}X")
+
+    print(f"\n{config['desired_bsa_percentage']}% BSA solution:")
+    b_res = results['bsa']
+    print(f"Total volume of the final solution: {config['volume_final']} mL.")
+    print(f"Mass of BSA needed: {b_res['mass_bsa']:.2f} g.")
+    print(f"Dissolve BSA in {b_res['dissolve_volume']:.2f} mL of {config['pbs_dilution']}xPBS solution.")
+    print(f"Raise to {b_res['final_volume']} mL with {config['pbs_dilution']}xPBS.")
+    print(f"Final concentrations: BSA: {config['desired_bsa_percentage']}% ")
 
 
 

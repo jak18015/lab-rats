@@ -54,7 +54,7 @@ def splitter(initial_flask_list, final_flask_list, split_factor):
     else:
         return f"Insufficient cells. Need additional surface area: {abs(surface_area_difference):.2f} cm²."
 
-def flask_split(config):
+def calculate_cell_culture(config):
     """
     Process a configuration dictionary to perform flask splitting.
     :param config: Dictionary containing initial and final flask lists and split factor
@@ -64,8 +64,7 @@ def flask_split(config):
     final_flasks = config.get("final_flasks", [])
     split_factor = config.get("split_factor", 4)
 
-    result = splitter(initial_flasks, final_flasks, split_factor)
-    print(result)
+    return splitter(initial_flasks, final_flasks, split_factor)
 
 # Example usage
 if __name__ == "__main__":

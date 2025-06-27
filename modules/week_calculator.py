@@ -19,11 +19,8 @@ def get_week_number(date_str, date_format="%Y-%m-%d"):
         print("Incorrect date format. Please use YYYY-MM-DD.")
         return None
 
-def week_number_calculator(config):
+def calculate_week_calculator(config):
     date_str = config.get("date_str", "2025-05-23")
     date_format = config.get("date_format", "%Y-%m-%d")
 
-    # Get the week number
-    week_number = get_week_number(date_str, date_format)
-    if week_number is not None:
-        print(f"Week number for {date_str}: {week_number}")
+    return get_week_number(date_str, date_format)

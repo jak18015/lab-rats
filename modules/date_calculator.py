@@ -21,10 +21,9 @@ def hours_between_dates(date1_str, date2_str, date_format="%Y-%m-%d %H:%M"):
         print(f"Error parsing dates: {e}")
         return None
 
-def calculate_hours_between_dates(config):
+def calculate_date_calculator(config):
     date1 = config.get("date1", "2025-05-23 17:00")
     date2 = config.get("date2", "2025-05-24 17:00")
     date_format = config.get("date_format", "%Y-%m-%d %H:%M")
 
-    print(f"\nInfection timepoint: {date1}")
-    print(f"Timepoint1: {date1}\n\t{hours_between_dates(date1, date2, date_format)} hpi")
+    return hours_between_dates(date1, date2, date_format)

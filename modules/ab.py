@@ -19,18 +19,30 @@ def calculate_multi_dilution(num_coverslips, volume_per_coverslip_uL, antibodies
     }
 
 
-def calculate_ab_dilutions(config):
+def calculate_ab(config):
     coverslips = config["num_coverslips"]
     vol_per_coverslip = config["volume_per_coverslip_uL"]
     overage = config.get("overage_percent", 10)
     dilution_sets = config["dilution_sets"]
+
+    results = {}
+    for set_name, antibodies in dilution_sets.items():
+        results[set_name] = calculate_multi_dilution(coverslips, vol_per_coverslip, antibodies, overage)
+    
+    return results
+
+def print_ab_results(config, results):
+    coverslips = config["num_coverslips"]
+    vol_per_coverslip = config["volume_per_coverslip_uL"]
+    overage = config.get("overage_percent", 10)
+
     print("\n=== Antibody Dilution Calculations ===\n")
     print(f"Number of coverslips: {coverslips}")
     print(f"Volume per coverslip: {vol_per_coverslip} µL")
     print(f"Overage percentage: {overage}%\n")
-    for set_name, antibodies in dilution_sets.items():
+
+    for set_name, result in results.items():
         print(f"--- {set_name} ---")
-        result = calculate_multi_dilution(coverslips, vol_per_coverslip, antibodies, overage)
         print(f"Total volume: {result['adjusted_total_volume_uL']} µL")
         for name, vol in result['stock_volumes_uL'].items():
             print(f"\t- {name}: {vol} µL")

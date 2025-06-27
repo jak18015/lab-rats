@@ -34,31 +34,11 @@ def scale_gibson_mastermix(num_reactions, hot_fusion=False):
     return scaled_recipe, adjustments, hot_fusion
 
 
-def run_gibson_mixture(config):
+def calculate_gibson(config):
     num_reactions = config.get("num_reactions", 40)
     hot_fusion = config.get("hot_fusion", False)
 
     # Scale and get adjustments
     scaled, adjustments, hot_fusion_used = scale_gibson_mastermix(num_reactions, hot_fusion)
 
-    # Print header
-    print(f"\nScaled {'Hot Fusion' if hot_fusion_used else 'Gibson'} Assembly Master Mix for {num_reactions} reactions:")
-    print(f"Total volume: {scaled['Total volume (uL)']} μL")
-    print(f"Aliquot size: {scaled['Aliquot size (uL)']} μL")
-
-    # Print ingredients with aligned formatting
-    print("\nScaled Ingredients:")
-    ingredient_keys = [k for k in scaled if "volume" not in k and "Aliquot" not in k]
-    max_key_len = max(len(k) for k in ingredient_keys)
-
-    for ingredient in ingredient_keys:
-        print(f"{ingredient:<{max_key_len}} : {scaled[ingredient]} μL")
-
-    # Print adjustment notes
-    if adjustments:
-        print("\nNote:")
-        for ingredient, original_value in adjustments.items():
-            print(f"- {ingredient}: originally {original_value} μL, raised to 1.0 μL for pipetting accuracy.")
-
-    if hot_fusion_used:
-        print("\nHot Fusion mode: Taq DNA ligase omitted and volume replaced with water.")
+    return scaled, adjustments, hot_fusion_used

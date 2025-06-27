@@ -60,35 +60,9 @@ def calculate_lipofection_volumes(well_format, num_wells, dna_concentration_ug_p
 
     return total
 
-def run_lipofection_calculator(config):
+def calculate_lipofectamine(config):
     well_format = config.get("well_format", "12-well")
     num_wells = config.get("num_wells", 12)
     dna_concentration_ug_per_ul = config.get("dna_concentration_ug_per_ul", 0.8)
 
-    volumes = calculate_lipofection_volumes(well_format, num_wells, dna_concentration_ug_per_ul)
-
-    print(f"Lipofection Reagent Volumes for {num_wells} wells ({well_format}):\n")
-
-    ordered_keys = [
-        "-- Tube 1 (Low dose) --",
-        "Opti-MEM for Lipo mix per tube (µL)",
-        "Lipofectamine 3000 Reagent (µL) - Low dose",
-        "Opti-MEM for DNA mix per tube (µL)",
-        "DNA (µL) per tube",
-        "P3000 Reagent (µL) per tube",
-        "-- Tube 2 (High dose) --",
-        "Opti-MEM for Lipo mix per tube (µL)",
-        "Lipofectamine 3000 Reagent (µL) - High dose",
-        "Opti-MEM for DNA mix per tube (µL)",
-        "DNA (µL) per tube",
-        "P3000 Reagent (µL) per tube",
-        "-- Final --",
-        "Final complex volume per well (µL)",
-        "Total DNA (µg)"
-    ]
-
-    for key in ordered_keys:
-        if key.startswith("--"):
-            print(f"\n{key}")
-        else:
-            print(f"{key}: {volumes[key]} µL")
+    return calculate_lipofection_volumes(well_format, num_wells, dna_concentration_ug_per_ul)
