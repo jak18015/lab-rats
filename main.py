@@ -21,8 +21,8 @@ script_choices = list(scripts.keys())
 
 def main():
     """Run the script selected by the user."""
-    if not os.getcwd().endswith("lab-calculations"):
-        raise RuntimeError("Please run this script from the 'lab-calculations' directory.")
+    if not os.getcwd().endswith("lab-rats"):
+        raise RuntimeError("Please run this script from the 'lab-rats' directory.")
 
     print("Available scripts:")
     for i, script_name in enumerate(script_choices, start=1):
