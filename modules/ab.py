@@ -1,6 +1,3 @@
-import os
-import json
-
 def calculate_multi_dilution(num_coverslips, volume_per_coverslip_uL, antibodies, overage_percent=10):
     base_total_volume = num_coverslips * volume_per_coverslip_uL
     adjusted_total_volume = base_total_volume * (1 + overage_percent / 100)

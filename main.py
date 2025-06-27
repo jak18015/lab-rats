@@ -5,7 +5,8 @@ from modules import (
     gibson, 
     date_calculator, 
     week_calculator, 
-    lipofectamine
+    lipofectamine,
+    cell_culture
 )
 from modules.config_functions import load_config, save_config, edit_config
 
@@ -15,14 +16,15 @@ scripts = {
     'gibson': gibson.run_gibson_mixture,
     'date_calculator': date_calculator.calculate_hours_between_dates,
     'week_calculator': week_calculator.week_number_calculator,
-    'lipofectamine': lipofectamine.run_lipofection_calculator
+    'lipofectamine': lipofectamine.run_lipofection_calculator,
+    'flask_split': cell_culture.flask_split,
 }
 script_choices = list(scripts.keys())
 
 def main():
     """Run the script selected by the user."""
-    if not os.getcwd().endswith("lab-calculations"):
-        raise RuntimeError("Please run this script from the 'lab-calculations' directory.")
+    if not os.getcwd().endswith("lab-rats"):
+        raise RuntimeError("Please run this script from the 'lab-rats' directory.")
 
     print("Available scripts:")
     for i, script_name in enumerate(script_choices, start=1):

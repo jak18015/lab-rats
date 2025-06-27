@@ -9,10 +9,10 @@
     },
     "Secondary Antibodies": {
       "Goat anti-Rabbit 488": 20,
-      "Streptavidin 647": 20
+      "Streptavidin 647": 20,
+      "Hoechst": 20
     },
     "Nuclear Stain": {
-      "Hoechst": 20
     }
   }
 }
