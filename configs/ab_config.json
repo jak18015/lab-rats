@@ -1,17 +1,18 @@
 {
-    "num_coverslips": 6,
+    "num_coverslips": 2,
     "volume_per_coverslip_uL": 20.0,
     "overage_percent": 10,
     "dilution_sets": {
         "Primary Antibodies": {
-            "Mouse anti-GFP": 500,
-            "Goat anti-toxo biotin": 500
+            "Rabbit anti-CPL": 100,
+            "Mouse anti-IMC1": 1000
         },
         "Secondary Antibodies": {
             "Goat anti-Rabbit 488": 1000,
-            "Streptavidin 647": 1000,
-            "Hoechst": 1000
+            "Goat anti-Mouse 555/594": 1000
         },
-        "Nuclear Stain": {}
+        "Nuclear Stain": {
+            "Hoechst": 1000
+        }
     }
 }
